@@ -3,34 +3,47 @@
     <title>Stack'Em OpenShift Competition</title>
     <script type="text/javascript" src="/scripts/llqrcode.js"></script>
     <script type="text/javascript" src="/scripts/webqr.js"></script>
-    <link rel="stylesheet" href="/stylesheets/entry.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/entry.css" />
 </head>
 <body>
-    <div id="main">
-        <div id="mainbody">
-            <div id="left">
+    <div class="container main">
+        <div class="row" id="mainbody">
+            <div class="col-sm-8">
                 <div id="outdiv"></div>
                 <div id="result"></div>  
                 <canvas id="qr-canvas" style="display: none;" width="800" height="600"></canvas>
                 <script type="text/javascript">load();</script>
             </div>
-            <div id="right">
-                <form id="entry" action="/entry" method="POST">
-                    <div class="form-group">
-                        <label class="form-label" for="name">Name:</label>
-                        <input type="name" class="form-control" id="name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="company">Company:</label>
-                        <input type="name" class="form-control" id="company" name="company">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-                    <input type="hidden" id="sub" name="entry" value=""> 
-                    <button value="submit" type="submit" class="btn">Submit</button>
-                </form>
+            
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <form id="entry" action="/entry" method="POST">
+                        <div class="panel-body">
+                            <input type="hidden" id="sub" name="entry" value=""> 
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="name">Name:</label>
+                                <input type="name" class="form-control" id="name" name="name" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="company">Company:</label>
+                                <input type="name" class="form-control" id="company" name="company" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" />
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="form-group">
+                                <button value="submit" type="submit" class="btn btn-success">Save details</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

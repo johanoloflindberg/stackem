@@ -1,42 +1,19 @@
-#left {
-    float: left;
-    padding-right: 50px;
+.main {
+  margin-top: 20px;
 }
+
+form {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+#outdiv {
+  background: black;
+  text-align: center;
+}
+
 #result {
     padding: 10px;
     max-width: 600px;
     font-size: 20px;
-}
-#right {
-    float: right;
-}
-#entry {
-    width: 600px;
-    background: rgba(40,40,40,0.4);
-    padding: 10px;
-}
-.form-label {
-    display: inline-block;
-    float: left;
-    clear: left;
-    width: 150px;
-    text-align: right;
-    font-weight: bold;
-    padding-right: 10px;
-}
-.form-control {
-    display: inline-block;
-    float: left;
-}
-.form-group {
-    margin: 10px;
-    padding: 5px;
-}
-.btn {
-    display: inline-block;
-    margin: 20px; 
-}
-#outdiv {
-    border: 1px solid black;
-    margin: 10px;
 }
