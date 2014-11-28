@@ -1,0 +1,80 @@
+.container {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+#playspace {
+    height: 800px;
+    width: 1000px;
+    background: black;
+    position: relative;
+}
+#mainhead {
+    color: white;
+    position: absolute;
+    font-size: 70px;
+    left: 370px;
+    top: 300px;
+}
+.block {
+    display: block;
+    position: absolute;
+}
+.active {
+    display: block;
+}
+.inactive {
+    display: none;
+}
+#blue {
+    height: 50px;
+    width: 200px;
+    top: 750px;
+    left: 400px;
+}
+#yellow {
+    height: 100px;
+    width: 100px;
+    top: 700px;
+    left: 750px;
+}
+#pink, #ginger, #green, #orange, #purple {
+    height: 100px;
+    width: 150px;
+}
+#pink {
+    top: 700px;
+    left: 0px;
+}
+#ginger {
+    top: 700px;
+    left: 150px;
+}
+#green {
+    top: 700px;
+    left: 300px;
+}
+#orange {
+    top: 700px;
+    left: 600px;
+}
+#purple {
+    top: 700px;
+    left: 850px;
+}
+#submit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    display: block;
+    width: 100px;
+    height: 40px;
+    color: white;
+    background: purple;
+    border: 1px solid gray;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 12px;
+}

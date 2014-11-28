@@ -1,35 +1,32 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "StackEm",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "StackEm Competition App",
   "keywords": [
     "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
+    "openshift",
+    "competition",
+    "blocks"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+    "name": "Katie Miller",
+    "email": "katie@codemiller.com",
+    "url": "http://www.codemiller.com/"
   },
-  "homepage": "http://www.openshift.com/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openshift/origin-server"
+    "url": "https://github.com/codemiller/stackem"
   },
-
   "engines": {
-    "node": ">= 0.6.0",
+    "node": ">= 0.10.0",
     "npm": ">= 1.0.0"
   },
-
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~4.10.4",
+    "body-parser": "~1.9.3"
   },
   "devDependencies": {},
   "bundleDependencies": [],
-
   "private": true,
   "main": "server.js"
 }

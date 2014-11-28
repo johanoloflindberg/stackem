@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Stack'Em OpenShift Competition</title>
+    <script type="text/javascript" src="/scripts/llqrcode.js"></script>
+    <script type="text/javascript" src="/scripts/webqr.js"></script>
+    <link rel="stylesheet" href="/stylesheets/entry.css">
+</head>
+<body>
+    <div id="main">
+        <div id="mainbody">
+            <div id="left">
+                <div id="outdiv"></div>
+                <div id="result"></div>  
+                <canvas id="qr-canvas" style="display: none;" width="800" height="600"></canvas>
+                <script type="text/javascript">load();</script>
+            </div>
+            <div id="right">
+                <form id="entry" action="/entry" method="POST">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name:</label>
+                        <input type="name" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="company">Company:</label>
+                        <input type="name" class="form-control" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <input type="hidden" id="sub" name="entry" value=""> 
+                    <button value="submit" type="submit" class="btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/scripts/entry.js"></script>
+</body>
+</html>
