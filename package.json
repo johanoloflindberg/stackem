@@ -23,7 +23,15 @@
   },
   "dependencies": {
     "express": "~4.10.4",
-    "body-parser": "~1.9.3"
+    "body-parser": "~1.9.3",
+    "jade": "~1.7.0",
+    "passport": "~0.2.1",
+    "mongojs": "~0.17.0",
+    "config-multipaas": "~0.1.0"
+  },
+  "scripts": {
+    "build": "npm run initdb",
+    "initdb": "node bin/bootstrap.js"
   },
   "devDependencies": {},
   "bundleDependencies": [],

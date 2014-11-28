@@ -1,12 +1,15 @@
 #!/bin/env node
 var express = require('express');
 var bodyParser = require('body-parser');
+var validateEntry = require('./validate');
+var submitEntry = require('./submit').addEntry;
+var drawTime = process.env.YOW_DRAW || '3.30pm on Friday';
 
-var StackEm = function() {
+var StackEm = function () {
 
     var self = this;
 
-    self.setupVariables = function() {
+    self.setupVariables = function () {
         self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
         self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
@@ -16,7 +19,7 @@ var StackEm = function() {
         };
     };
 
-    self.terminator = function(sig){
+    self.terminator = function (sig){
         if (typeof sig === "string") {
            console.log('%s: Received %s - terminating sample app ...',
                        Date(Date.now()), sig);
@@ -25,8 +28,8 @@ var StackEm = function() {
         console.log('%s: Node server stopped.', Date(Date.now()) );
     };
 
-    self.setupTerminationHandlers = function(){
-        process.on('exit', function() { self.terminator(); });
+    self.setupTerminationHandlers = function (){
+        process.on('exit', function () { self.terminator(); });
 
         ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
          'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
@@ -35,51 +38,52 @@ var StackEm = function() {
         });
     };
 
-    self.createRoutes = function() {
+    self.createRoutes = function () {
         self.routes = { };
 
-        //TODO add password protection
-        self.routes['/blocks'] = function(req, res) {
+        //TODO add auth 
+        self.routes['/blocks'] = function (req, res) {
             if (!req.body) return res.sendStatus(400);
-            var blocks = req.body; 
-            //TODO validate entry and produce id 
-            console.log(blocks);
-            res.status(200).send("foobarbaz");
+            var result = validateEntry(req.body);
+            if (result == 'invalid') {
+                return res.sendStatus(400);
+            } else {
+                return res.status(200).send(result);
+            }
         };
 
-         self.routes['/entry'] = function(req, res) {
-            var name = req.body.name; 
-            var company = req.body.company; 
-            var email = req.body.email; 
-            var entry = req.body.entry; 
-            //TODO test if unique or not and send appropriate response
-            //error if already entered
-            // make sure all params present including submission - make sure it's valid
-            // enter in database, with one or two entries depending
-            // serve appropriate response page
-            console.log(name + " " + company + " " + email + " " + entry);
-            res.status(200).send("unique");
+         self.routes['/entry'] = function (req, res) {
+             var result = submitEntry(req.body.name, req.body.company, req.body.email, req.body.entry);
+             if (result.result == 'invalid') {
+                 res.status(400).render('error', { error: result.error });
+             } else if (result.result == 'unique') {
+                 res.status(200).render('result', { unique: 'unique', chances: 'two chances', draw: drawTime });
+             } else {
+                 res.status(200).render('result', { unique: 'not unique', chances: 'one chance', draw: drawTime });
+             }
         };
-     };
+    };
 
-    self.initializeServer = function() {
+    self.initializeServer = function () {
         self.app = express();
         self.createRoutes();
         self.app.use(express.static(__dirname + '/public'));
+        self.app.set('views', __dirname + '/views')
+        self.app.set('view engine', 'jade')
         var jsonParser = bodyParser.json();
         var urlEncodedParser = bodyParser.urlencoded({ extended: false});
         self.app.post('/blocks', jsonParser, self.routes['/blocks']);
         self.app.post('/entry', urlEncodedParser, self.routes['/entry']);
     };
 
-    self.initialize = function() {
+    self.initialize = function () {
         self.setupVariables();
         self.setupTerminationHandlers();
         self.initializeServer();
     };
 
-    self.start = function() {
-        self.app.listen(self.port, self.ipaddress, function() {
+    self.start = function () {
+        self.app.listen(self.port, self.ipaddress, function () {
             console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);
         });
